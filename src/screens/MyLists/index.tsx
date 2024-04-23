@@ -1,4 +1,4 @@
-import {Container, Subtitle, Content, ButtonContainer, AddListIcon, NoListContainer} from "./styles";
+import {Container, Content, ButtonContainer} from "./styles";
 import {Header} from "../../components/Header";
 import {Button} from "../../components/Button";
 import {ListCard} from "../../components/ListCard";
@@ -6,21 +6,17 @@ import {useCallback, useState} from "react";
 import {FlatList} from "react-native";
 import {useFocusEffect, useNavigation} from "@react-navigation/native";
 import {listGetAll} from "../../storage/lists/listGetAll";
-
-export type ListItem = {
-    id: string,
-    title: string,
-    createdAt: string,
-};
+import {Empty} from "../../components/Empty";
+import {ListItemType} from "../../@types/types";
 
 export function MyLists() {
-    const [list, setList] = useState<ListItem[]>([]);
+    const [list, setList] = useState<ListItemType[]>([]);
 
     const navigation = useNavigation();
 
     async function fecthLists(): Promise<void> {
         try {
-            const data: ListItem[] = await listGetAll();
+            const data: ListItemType[] = await listGetAll();
             setList(data);
         } catch (e) {
             console.log(e);
@@ -36,17 +32,17 @@ export function MyLists() {
             <Header title={'Minhas listas'} isShowGoBackBtn screen={'home'} />
 
             <Content>
-                {list.length > 0 ?
+                {list.length > 0
+                    ?
                     <FlatList
                         data={list}
                         keyExtractor={(item) => item.id}
-                        renderItem={({item}) => (<ListCard listData={item} onPress={() => navigation.navigate('list', {itemData: item})}/>)}
+                        renderItem={({item}) => (
+                            <ListCard listData={item} onPress={() => navigation.navigate('list', {itemData: item})}/>
+                        )}
                         contentContainerStyle={{gap: 12, paddingBottom: 100}}/>
                     :
-                    <NoListContainer>
-                        <AddListIcon />
-                        <Subtitle>Você ainda não possui listas</Subtitle>
-                    </NoListContainer>
+                    <Empty text={'Você ainda não possui listas'}/>
                 }
 
                 <ButtonContainer>

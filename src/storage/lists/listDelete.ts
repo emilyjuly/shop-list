@@ -1,26 +1,21 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { LIST_COLLETION } from "../storageConfig";
-import {ListItem} from "../../screens/MyLists";
-import {listGetAll} from "./listGetAll";
+import { LIST_COLLECTION } from '../storageConfig';
+import { listGetAll } from './listGetAll';
+import {ListItemType} from "../../@types/types";
 
-export async function listDelete(id: string): Promise<void> {
+export async function listDelete(idToDelete: string): Promise<void> {
     try {
-        const storedLists: string[] = await listGetAll();
+        const storedLists: ListItemType[] = await listGetAll();
 
-        const newLists = storedLists.filter((item: ListItem) => item.id !== id);
+        const filteredList: ListItemType[] = storedLists.filter(
+            (item: ListItemType): boolean => item.id !== idToDelete
+        );
 
-        if (newLists.length > 0) {
-            const newStorage: string = JSON.stringify(newLists);
-            await AsyncStorage.clear()
-            await AsyncStorage.setItem(LIST_COLLETION, newStorage);
-        } else {
-            const newStorage: string = JSON.stringify([]);
-            await AsyncStorage.clear()
-            await AsyncStorage.setItem(LIST_COLLETION, newStorage);
-        }
+        const newStorage: string = JSON.stringify(filteredList);
 
-    } catch (e) {
-        throw e;
+        await AsyncStorage.setItem(LIST_COLLECTION, newStorage);
+    } catch (error) {
+        throw error;
     }
 }

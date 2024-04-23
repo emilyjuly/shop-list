@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import {Plus} from "phosphor-react-native";
 
 export type ButtonVariant = 'PRIMARY' | 'DANGER';
 
@@ -29,9 +28,3 @@ export const BtnText = styled.Text<ButtonStylesProps>`
     font-size: ${({ theme }) => theme.FONT_SIZE.MD}px;
     color: ${({ theme, variant }) => variant === 'DANGER' ? theme.COLORS.WHITE : theme.COLORS.DARK_BLUE};
 `;
-
-export const AddIcon = styled(Plus).attrs(({ theme }) => ({
-    color: theme.COLORS.WHITE,
-    weight: 'bold',
-    size: theme.FONT_SIZE.XL,
-}))``

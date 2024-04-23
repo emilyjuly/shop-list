@@ -1,9 +1,9 @@
 import {CardDate, CardIcon, CardTitle, Container} from "./styles";
 import {TouchableOpacityProps} from "react-native";
-import {ListItem} from "../../screens/MyLists";
+import {ListItemType} from "../../@types/types";
 
 type ListCardProps = TouchableOpacityProps & {
-    listData: ListItem
+    listData: ListItemType
 };
 
 export function ListCard({ listData, ...rest }: ListCardProps) {
@@ -12,7 +12,6 @@ export function ListCard({ listData, ...rest }: ListCardProps) {
         <Container {...rest}>
             <CardTitle>{ listData.title }</CardTitle>
             <CardDate>{`Criada em: ${listData.createdAt}`}</CardDate>
-
             <CardIcon />
         </Container>
     )

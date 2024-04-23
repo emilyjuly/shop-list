@@ -16,26 +16,29 @@ export const Content = styled.View`
     padding: 0 16px 24px;
 `;
 
-export const Title = styled.Text`
-    text-align: center;
-    
-    font-size: ${({ theme }) => theme.FONT_SIZE.XL}px;
-    color: ${({ theme }) => theme.COLORS.LIGHT_GREEN};
-    font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-`;
-
-export const Subtitle = styled.Text`
-    text-align: center;
-    
-    font-size: ${({ theme }) => theme.FONT_SIZE.MD}px;
-    color: ${({ theme }) => theme.COLORS.GRAY_600};
-    font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
-    margin-bottom: 30px;
-`;
-
 export const ContainerInput = styled.View`
     justify-content: space-between;
     align-items: center;
     
+    gap: 10px;
+    margin-bottom: 10px;
+    
     width: 100%;
+`;
+
+export const ListContent = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
+export const ListTextWhite = styled.Text`
+    color: ${({ theme }) => theme.COLORS.WHITE};
+    font-size: ${({ theme }) => theme.FONT_SIZE.LG}px;
+    font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
+`;
+
+export const ListTextGray = styled.Text`
+    color: ${({ theme }) => theme.COLORS.GRAY_600};
+    font-size: ${({ theme }) => theme.FONT_SIZE.LG}px;
+    font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
 `;

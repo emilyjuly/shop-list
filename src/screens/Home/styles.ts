@@ -26,15 +26,6 @@ export const HomeTitle = styled.Text`
     text-transform: uppercase;
 `;
 
-export const Subtitle = styled.Text`
-    text-align: center;
-    
-    font-size: ${({ theme }) => theme.FONT_SIZE.LG}px;
-    color: ${({ theme }) => theme.COLORS.GRAY_200};
-    font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
-    margin-top: 10px;
-`;
-
 export const ButtonContainer = styled.View`
     margin-top: 32px;
 `;

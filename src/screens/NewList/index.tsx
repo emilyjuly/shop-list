@@ -1,27 +1,29 @@
-import {ButtonContainer, Container, Content, ListIcon, Subtitle, Title} from "./styles";
+import {ButtonContainer, Container, Content, ListIcon} from "./styles";
 import {Header} from "../../components/Header";
 import {Button} from "../../components/Button";
 import {TextInput} from "../../components/TextInput";
 import {useState} from "react";
 import uuid from 'react-native-uuid';
-import {ListItem} from "../MyLists";
 import {listCreate} from "../../storage/lists/listCreate";
 import {useNavigation} from "@react-navigation/native";
 import {AppError} from "../../util/AppError";
 import {Alert} from "react-native";
+import {ListItemType} from "../../@types/types";
+import {Subtitle, Title} from "../../styles/globalStyles";
 
 export function NewList() {
-    const [textInput, setTextInput] = useState('');
+    const [textInput, setTextInput] = useState<string>('');
     const navigation = useNavigation();
 
     async function handleCreateList(listName: string): Promise<void> {
-        const newId = uuid.v4() as string;
-        const newDate = new Date() as Date;
+        const newId: string = uuid.v4() as string;
+        const newDate: Date = new Date() as Date;
 
-        const newList: ListItem = {
+        const newList: ListItemType = {
             id: newId,
             title: listName,
             createdAt: newDate.toLocaleDateString(),
+            items: []
         };
 
         setTextInput('');

@@ -1,3 +1,3 @@
-const LIST_COLLETION: string = '@shop-list:list';
+const LIST_COLLECTION = '@shop-list:lists';
 
-export { LIST_COLLETION };
+export { LIST_COLLECTION };

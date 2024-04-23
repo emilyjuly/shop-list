@@ -1,32 +1,24 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LIST_COLLECTION } from '../storageConfig';
+import { listGetAll } from './listGetAll';
+import { AppError } from '../../util/AppError';
+import {ListItemType} from "../../@types/types";
 
-import { LIST_COLLETION } from "../storageConfig";
-import {ListItem} from "../../screens/MyLists";
-import {listGetAll} from "./listGetAll";
-import {AppError} from "../../util/AppError";
-
-export async function listCreate(newList: ListItem): Promise<void> {
+export async function listCreate(newList: ListItemType): Promise<void> {
     try {
-        const storedLists: string[] = await listGetAll();
+        const storedLists: ListItemType[] = await listGetAll();
 
-        const isListNameAlreadyUsed = storedLists.map((item: ListItem) => item.title).includes(newList.title);
+        const listAlreadyExists: boolean = storedLists
+            .map((item: ListItemType) => item.title)
+            .includes(newList.title);
 
-        if (isListNameAlreadyUsed) {
-            throw new AppError(
-                'Já existe uma lista com esse nome. Por favor, tente outro.'
-            );
-        }
-
-        if (newList.title === '') {
-            throw new AppError(
-                'Por favor, informe o nome da lista.'
-            );
+        if (listAlreadyExists) {
+            throw new AppError('Já existe uma lista com este nome.');
         }
 
         const newStorage: string = JSON.stringify([...storedLists, newList]);
-        await AsyncStorage.setItem(LIST_COLLETION, newStorage);
-
-    } catch (e) {
-        throw e;
+        await AsyncStorage.setItem(LIST_COLLECTION, newStorage);
+    } catch (error) {
+        throw error;
     }
 }

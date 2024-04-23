@@ -1,8 +1,9 @@
-import {Container, Content, HomeTitle, ImageContainer, Subtitle} from "./styles";
+import {Container, Content, HomeTitle, ImageContainer} from "./styles";
 import {Image, Dimensions} from "react-native";
 import {Button} from "../../components/Button";
 import {ButtonContainer} from "./styles";
 import {useNavigation} from "@react-navigation/native";
+import {Subtitle} from "../../styles/globalStyles";
 
 const windowWidth: number = Dimensions.get('window').width;
 const windowHeight: number = Dimensions.get('window').height;
